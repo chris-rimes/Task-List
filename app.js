@@ -15,8 +15,10 @@ function loadEventListeners() {
   form.addEventListener("submit", addTask);
   // Remove Task Event
   taskList.addEventListener("click", removeTask);
+  taskList.addEventListener("touchstart", removeTask);
   // Clear Task Event
   clearBtn.addEventListener("click", clearTasks);
+  clearBtn.addEventListener("touchstart", clearTasks);
   // filter Tasks Event
   filter.addEventListener("keyup", filterTasks);
 }
@@ -51,6 +53,7 @@ function getTasks() {
 
 // Add Task Fuction
 function addTask(e) {
+  e.preventDefault();
   if (taskInput.value === "") {
     alert("Add a task");
   } else {
@@ -77,7 +80,7 @@ function addTask(e) {
     // Clear the input
     taskInput.value = "";
 
-    e.preventDefault();
+
   }
 }
 
@@ -96,6 +99,7 @@ function storeTaskInLocalStorage(task) {
 
 // Remove Task Function
 function removeTask(e) {
+  e.preventDefault();
   if (e.target.parentElement.classList.contains("delete-item")) {
     if (confirm("Are You Sure?")) {
       e.target.parentElement.parentElement.remove();
@@ -125,7 +129,8 @@ function removeTaskFromLocalStorage(taskItem) {
 }
 
 // Clear Tasks Function
-function clearTasks() {
+function clearTasks(e) {
+  e.preventDefault();
   // taskList.innerHTML = '';
 
   // Faster method to remove list
